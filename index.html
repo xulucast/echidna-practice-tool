@@ -18,7 +18,8 @@
         <button class="btn-answer">4</button>
         <button class="btn-answer">5</button>
         <button class="btn-answer">6</button>
-        <button class="btn-answer">7</button>    
+        <button class="btn-answer">7</button>
+        <input type="text">
     </div>
     <div>
         <img>
@@ -74,6 +75,14 @@
             'atk1': '3',
             'atk1': '6',
             'atk1': '2',
+            'jeolgu1': '5',
+            'jeolgu2': '4',
+            'jeolgu3': '7',
+            'jeolgu4': '4',
+            'jeolgu5': '5',
+            'jeolgu6': '4',
+            'jeolgu7': '1',
+            'jeolgu8': '4',
         };
         const randomImg = (object) => {
             const keys = Object.keys(object);
@@ -90,6 +99,17 @@
     
         $('.btn-answer').click(function() {
             const userAnswer = $(this).text();
+            checkAnswer(userAnswer);
+        });
+
+        $('input').on('change', function() {
+            const userAnswer = $(this).val();
+            checkAnswer(userAnswer);
+            $(this).val('');
+            $(this).focus();
+        });
+
+        const checkAnswer = (userAnswer) => {
             if (userAnswer == imgDict[current]) {
                 const delta = Date.now() - start;
                 const seconds = delta/1000;
@@ -102,7 +122,7 @@
                 console.log(imgDict[current]);
                 $('h3').text('Wrong');
             }
-        });
+        }
     
         counts = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0};
         for (let [key, value] of Object.entries(imgDict)) {
