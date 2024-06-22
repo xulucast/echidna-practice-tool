@@ -77,16 +77,21 @@
         return keys[Math.floor(keys.length * Math.random())];
     };
     let current = '';
+    let start = 0;
 
     const init = () => {
         current = randomImg(imgDict);
         $('img').attr('src', `img/${current}.png`);
+        start = Date.now()
     }
 
     $('.btn-answer').click(function() {
         const userAnswer = $(this).text();
         if (userAnswer == imgDict[current]) {
-            $('h3').text('Correct');
+            const delta = Date.now() - start;
+            const seconds = delta/1000;
+            start = Date.now();
+            $('h3').text(`Correct: ${seconds} seconds`);
             current = randomImg(imgDict);
             $('img').attr('src', `img/${current}.png`);
         } else {
