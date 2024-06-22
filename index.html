@@ -1,1 +1,103 @@
-<h1>Hello World</h1>
+<style>
+    img {
+        margin: 1em;
+        width: 1080px;
+    }
+
+    button {
+        margin: 0.25em;
+    }
+</style>
+<div>
+    <img>
+</div>
+<div>
+    <button class="btn-answer">1</button>
+    <button class="btn-answer">2</button>
+    <button class="btn-answer">3</button>
+    <button class="btn-answer">4</button>
+    <button class="btn-answer">5</button>
+    <button class="btn-answer">6</button>
+    <button class="btn-answer">7</button>    
+</div>
+<div>
+    <h3></h3>
+</div>
+<div>
+    <button onclick="init()">Start</button>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+<script>
+    let imgDict = {
+        'loteng1': '5',
+        'loteng2': '4',
+        'loteng3': '3',
+        'loteng4': '5',
+        'loteng5': '3',
+        'loteng6': '7',
+        'loteng7': '3',
+        'loteng8': '4',
+        'memo1': '1',
+        'memo2': '3',
+        'memo3': '6',
+        'memo4': '1',
+        'memo5': '7',
+        'memo6': '1',
+        'memo7': '2',
+        'memo8': '3',
+        'tofu1': '3',
+        'tofu2': '1',
+        'tofu3': '1',
+        'tofu4': '6',
+        'tofu5': '6',
+        'tofu6': '3',
+        'tofu7': '3',
+        'tofu8': '3',
+        'zeals1': '7',
+        'zeals2': '4',
+        'zeals3': '7',
+        'zeals4': '6',
+        'zeals5': '1',
+        'zeals6': '2',
+        'zeals7': '6',
+        'zeals8': '2',
+        'atk1': '2',
+        'atk1': '4',
+        'atk1': '3',
+        'atk1': '4',
+        'atk1': '1',
+        'atk1': '3',
+        'atk1': '6',
+        'atk1': '2',
+    };
+    const randomImg = (object) => {
+        const keys = Object.keys(object);
+        return keys[Math.floor(keys.length * Math.random())];
+    };
+    let current = '';
+
+    const init = () => {
+        current = randomImg(imgDict);
+        $('img').attr('src', `img/${current}.png`);
+    }
+
+    $('.btn-answer').click(function() {
+        const userAnswer = $(this).text();
+        if (userAnswer == imgDict[current]) {
+            $('h3').text('Correct');
+            current = randomImg(imgDict);
+            $('img').attr('src', `img/${current}.png`);
+        } else {
+            console.log(userAnswer);
+            console.log(imgDict[current]);
+            $('h3').text('Wrong');
+        }
+    });
+
+    counts = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0};
+    for (let [key, value] of Object.entries(imgDict)) {
+        counts[value]++;
+    }
+</script>
